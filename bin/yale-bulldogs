@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/yale_bulldogs'
+
+YaleBulldogs::CLI.new.call
