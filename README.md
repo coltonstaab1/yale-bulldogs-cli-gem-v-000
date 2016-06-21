@@ -22,7 +22,7 @@ Or install it yourself as:
 
 Clone the app to your machine and cd into the app directory. From the app directory, input the following command into the terminal to launch the application: 
 
-  $ruby bin/yale-bulldogs
+    $ ruby bin/yale-bulldogs
 
 You can then either type in "men", "mens", or "m" to see information about the men's team, or "women", "womens", or "w" to see information about the women's team.
 
@@ -32,11 +32,11 @@ Then input the number of the meet you're interested in learning more about. You'
 
 To go back at any point, input:
 
-  $ back
+    $ back
 
 To exit the app at any point, input:
 
-  $ exit
+    $ exit
 
 ## Contributing
 
