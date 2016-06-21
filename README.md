@@ -32,11 +32,11 @@ Then input the number of the meet you're interested in learning more about. You'
 
 To go back at any point, input:
 
-  $back
+  $ back
 
 To exit the app at any point, input:
 
-  $exit
+  $ exit
 
 ## Contributing
 
