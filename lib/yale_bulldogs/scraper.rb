@@ -8,6 +8,8 @@ class YaleBulldogs::Scraper
     @url = "http://yalebulldogs.com/sports/#{gender}-swim/#{get_year_range(year)}/schedule"
   end
 
+  # this function gives us the year range associated with a particular season
+  # e.g. the season that started in 2008 went from October 2008-March 2009
   def get_year_range(year)
     year.to_s + '-' + (year.to_i + 1).to_s[2..4]
   end
@@ -21,6 +23,8 @@ class YaleBulldogs::Scraper
     end
   end
 
+  # this function scrapes the data at yalebulldogs.com and returns a meet object
+  # if the date and time associated with the entry in the schedule table isn't blank
   def scrape_season
     season = Season.new
     season.title = @doc.css("#mainbody h1")
