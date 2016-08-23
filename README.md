@@ -1,8 +1,13 @@
 # YaleBulldogs
 
-TODO: Write a gem description
+This gem allows fans of Yale Swimming and Diving to keep up with the performance of both YMSD and YWSD through a command-line interface. The data from this gem is scraped from the Yale Athletics website.
 
 ## Installation
+
+
+Install this gem by running the following command:
+
+    $ gem install yale_bulldogs
 
 Add this line to your application's Gemfile:
 
@@ -13,10 +18,6 @@ gem 'yale_bulldogs'
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install yale_bulldogs
 
 ## Usage
 
