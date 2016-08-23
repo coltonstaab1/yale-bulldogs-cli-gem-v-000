@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/yale_bulldogs'
+require_relative '../lib/yale_bulldogs'
 
 YaleBulldogs::CLI.new.call

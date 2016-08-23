@@ -39,31 +39,32 @@ class YaleBulldogs::CLI
 		end
 	end
 
-	def get_year_range(year)
-		year.to_s + '-' + (year.to_i + 1).to_s[2..4]
-	end
+	# def get_year_range(year)
+	# 	year.to_s + '-' + (year.to_i + 1).to_s[2..4]
+	# end
 
-	def request_data
-		gender = request_gender
-		year = request_year
-		url = "http://yalebulldogs.com/sports/#{gender}-swim/#{self.get_year_range(year)}/schedule"
-		begin 
-			doc = Nokogiri::HTML(open(url))
-			return doc
-		rescue 
-			puts "Data not available for that season. Please try again."
-			request_data
-		end
-	end
+	# def request_data
+	# 	gender = request_gender
+	# 	year = request_year
+	# 	url = "http://yalebulldogs.com/sports/#{gender}-swim/#{self.get_year_range(year)}/schedule"
+	# 	begin 
+	# 		doc = Nokogiri::HTML(open(url))
+	# 		return doc
+	# 	rescue 
+	# 		puts "Data not available for that season. Please try again."
+	# 		request_data
+	# 	end
+	# end
 
-	def display_meets
+	def display_meets(gender, year)
 		doc = request_data
-		results = YaleBulldogs::Season.scrape_season(doc)
-		puts results[0].text
-		results[1].each_with_index do |meet, index|
+		#results = YaleBulldogs::Season.scrape_season(doc)
+		season = YaleBulldogs::Scraper.new(gender, year)
+		puts season.title
+		season.meets.each_with_index do |meet, index|
 			puts (index + 1).to_s + ". : " + meet.opponent
 		end
-		results[1]
+		#results[1]
 	end
 
 	def meet_information
