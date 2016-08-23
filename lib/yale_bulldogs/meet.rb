@@ -7,4 +7,5 @@ class YaleBulldogs::Meet
 			@time = time
 			@result = result
 		end
+
 end

@@ -1,35 +1,21 @@
 class YaleBulldogs::Scraper
 
-  attr_accessor :gender, :year
+  attr_accessor :gender, :year, :url, :data
 
   def initialize(gender, year)
-    @gender = gender
-    @year = year
-    @url = "http://yalebulldogs.com/sports/#{gender}-swim/#{get_year_range(year)}/schedule"
-  end
-
-  # this function gives us the year range associated with a particular season
-  # e.g. the season that started in 2008 went from October 2008-March 2009
-  def get_year_range(year)
-    year.to_s + '-' + (year.to_i + 1).to_s[2..4]
-  end
-
-  def request_data(gender, year)
-    begin 
-      @doc = Nokogiri::HTML(open(url))
-      return doc
-    rescue 
-      return nil
-    end
+    self.gender = gender
+    self.year = year
+    self.url = "http://yalebulldogs.com/sports/#{gender}-swim/#{get_year_range(year)}/schedule"
+    self.data = request_data(self.url)
   end
 
   # this function scrapes the data at yalebulldogs.com and returns a meet object
   # if the date and time associated with the entry in the schedule table isn't blank
   def scrape_season
-    season = Season.new
-    season.title = @doc.css("#mainbody h1")
+    season = YaleBulldogs::Season.new
+    season.title = self.data.css("#mainbody h1").text
     
-    meet_data = doc.css(".schedule-home, .schedule-away")
+    meet_data = self.data.css(".schedule-home, .schedule-away")
     meet_data.each do |row|
       cell_data = row.css('td')
       date = cell_data[0].text.gsub(/\s+/, ' ')
@@ -45,4 +31,21 @@ class YaleBulldogs::Scraper
     end
     season
   end
+
+  private
+    # this function gives us the year range associated with a particular season
+    # e.g. the season that started in 2008 went from October 2008-March 2009
+    def get_year_range(year)
+      year.to_s + '-' + (year.to_i + 1).to_s[2..4]
+    end
+
+    def request_data(url)
+      begin 
+        doc = Nokogiri::HTML(open(url))
+        return doc
+      rescue 
+        return nil
+      end
+    end
+
 end
